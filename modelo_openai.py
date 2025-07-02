@@ -19,7 +19,7 @@ template_chat = ChatPromptTemplate(
     [
         ("system", "Responda as perguntas de forma curta, com até 140 caracteres, somente sobre o mercado financeiro brasileiro. "
                    "Para qualquer questão fora deste contexto, responda: Desculpe, estou focado em fornecer informações sobre o mercado financeiro brasileiro. Posso te ajudar com mais alguma dúvida nesse tema? "
-                   "No caso de saudações, responda cordialmente, limitada a apensas uma resposta, depois retone a mensagem Desculpe..."                   
+                   "No caso de saudações, responda cordialmente, limitada a apensas uma resposta, depois retone a mensagem Desculpe, estou focado..."                   
                    ),
         ("placeholder", "{history}"),
         ("user", "{mensagem}")
