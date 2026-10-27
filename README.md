@@ -2,7 +2,7 @@
 
 Protótipo de **assistente virtual educacional**, desenvolvido com Python, Streamlit e API OpenAI para esclarecer conceitos de investimentos no mercado brasileiro.
 
-**Estado:** projeto funcional em código, sem implantação pública confirmada. Requer chave de API válida no servidor.
+**Estado:** serviço criado no Render, em fase de configuração e validação. O acesso ao chat depende de senha de teste e de chave de API válidas configuradas no servidor.
 
 ## Objetivo
 
@@ -52,7 +52,11 @@ Start Command: streamlit run chat.py --server.address 0.0.0.0 --server.port $POR
 
 Configure **OPENAI_API_KEY** como variável de ambiente secreta no painel do Render. O valor não deve aparecer em commits, prints públicos ou arquivos do projeto. O plano gratuito do Render não torna gratuitas as chamadas à API OpenAI: consulte cobrança e estabeleça limites de uso antes de disponibilizar o chatbot publicamente.
 
-**Status:** implantação ainda não efetuada. A execução da integração OpenAI requer uma chave ativa e o deploy deve ser validado com uma conversa real. Por utilizar API paga e não possuir autenticação/cotas por visitante, mantenha o endereço restrito à fase de testes ou implemente controles de abuso antes de divulgação ampla.
+**Status:** serviço criado no Render: https://chatbot-financeiro-9p1s.onrender.com. Configure as variáveis `OPENAI_API_KEY` e `CHATBOT_ACCESS_PASSWORD` no painel [Environment do Render](https://dashboard.render.com/web/srv-dbgg1bff3r2c73eh4q3g/env). A senha compartilhada limita o acesso aos testadores, mas não substitui autenticação individual, cotas ou controles contra tentativas abusivas. A integração com a API precisa ser validada com uma conversa real após essa configuração. Estabeleça limites de gasto na conta OpenAI antes da divulgação.
+
+## Acesso em testes
+
+A interface exige a senha definida em `CHATBOT_ACCESS_PASSWORD` **antes** de acessar o chat; não há senha padrão embutida. O serviço é acessível pela internet, mas o uso da IA fica bloqueado sem essa senha. A proteção é adequada somente para testes limitados e não fornece identificação individual de usuários nem limites de consumo por visitante.
 
 ## Executar testes
 
