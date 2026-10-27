@@ -2,7 +2,7 @@
 
 Protótipo de **assistente virtual educacional**, desenvolvido com Python, Streamlit e API OpenAI para esclarecer conceitos de investimentos no mercado brasileiro.
 
-**Estado:** serviço criado no Render, em fase de configuração e validação. O acesso ao chat depende de senha de teste e de chave de API válidas configuradas no servidor.
+**Estado:** serviço criado no Render, em fase de configuração e validação. O chat tem acesso público, sem senha de visitante, e depende de chave de API válida configurada somente no servidor.
 
 ## Objetivo
 
@@ -52,11 +52,13 @@ Start Command: streamlit run chat.py --server.address 0.0.0.0 --server.port $POR
 
 Configure **OPENAI_API_KEY** como variável de ambiente secreta no painel do Render. O valor não deve aparecer em commits, prints públicos ou arquivos do projeto. O plano gratuito do Render não torna gratuitas as chamadas à API OpenAI: consulte cobrança e estabeleça limites de uso antes de disponibilizar o chatbot publicamente.
 
-**Status:** serviço criado no Render: https://chatbot-financeiro-9p1s.onrender.com. Configure as variáveis `OPENAI_API_KEY` e `CHATBOT_ACCESS_PASSWORD` no painel [Environment do Render](https://dashboard.render.com/web/srv-dbgg1bff3r2c73eh4q3g/env). A senha compartilhada limita o acesso aos testadores, mas não substitui autenticação individual, cotas ou controles contra tentativas abusivas. A integração com a API precisa ser validada com uma conversa real após essa configuração. Estabeleça limites de gasto na conta OpenAI antes da divulgação.
+**Status:** serviço criado no Render: https://chatbot-financeiro-9p1s.onrender.com. Configure a variável `OPENAI_API_KEY` no painel [Environment do Render](https://dashboard.render.com/web/srv-dbgg1bff3r2c73eh4q3g/env). O acesso é público e existe um limite de dez perguntas por sessão, apenas como contenção básica; isso não impede sessões repetidas nem substitui limites de consumo na API. A integração com a API precisa ser validada com uma conversa real após essa configuração. Estabeleça limites de gasto na conta OpenAI antes da divulgação.
 
-## Acesso em testes
+## Acesso público e controle de custos
 
-A interface exige a senha definida em `CHATBOT_ACCESS_PASSWORD` **antes** de acessar o chat; não há senha padrão embutida. O serviço é acessível pela internet, mas o uso da IA fica bloqueado sem essa senha. A proteção é adequada somente para testes limitados e não fornece identificação individual de usuários nem limites de consumo por visitante.
+O chat pode ser aberto **sem senha**. O código limita a **dez respostas geradas por sessão de navegador**, mas o limite pode ser reiniciado ao abrir outra sessão e não protege contra automação ou abuso deliberado. Uma pergunta que falha antes da resposta também pode consumir tokens na API. Configure controles de orçamento, alertas e cotas efetivas do lado do provedor/gateway antes de divulgação ampla.
+
+A variável `CHATBOT_ACCESS_PASSWORD`, se estiver cadastrada no Render, **não é mais utilizada** e pode ser excluída do painel Environment. **Não exclua `OPENAI_API_KEY`**.
 
 ## Executar testes
 
