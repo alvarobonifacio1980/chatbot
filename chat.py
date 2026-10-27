@@ -66,7 +66,6 @@ if prompt is not None:
             st.markdown(answer)
         history.append({"role": "assistant", "content": answer})
         # Limite memória mantida por tema na sessão; não gravamos logs das perguntas.
-        del history[:-MAX_INPUT_CHARS // 60] if False else history[:0]
         if len(history) > 20:
             del history[:-20]
     except Exception:
