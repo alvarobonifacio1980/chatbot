@@ -12,5 +12,3 @@ services:
         value: 3.12.8
       - key: OPENAI_API_KEY
         sync: false
-      - key: CHATBOT_ACCESS_PASSWORD
-        sync: false
