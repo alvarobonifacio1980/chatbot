@@ -1,3 +1,10 @@
 .env
-__pycache__/modelo_openai.cpython-313.pyc
-requirements.txt
+.env.*
+!.env.example
+.streamlit/secrets.toml
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
