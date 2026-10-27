@@ -111,3 +111,7 @@ Este projeto demonstra uma aplicação de IA conversacional; **não presta consu
 ---
 
 **Autor:** Álvaro Bonifácio.
+
+## Licenciamento e dados
+
+O repositório está público para demonstração e avaliação técnica, mas **ainda não possui licença de reutilização definida**. Seu código depende da API OpenAI; o uso da API e dos modelos observa os termos do provedor. Não publique chaves ou dados pessoais.
