@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import os
-import hmac
 
 import streamlit as st
 
@@ -21,29 +20,10 @@ def get_key() -> str:
         value = ""
     return value or os.getenv("OPENAI_API_KEY", "")
 
-def get_access_password() -> str:
-    try:
-        value = st.secrets.get("CHATBOT_ACCESS_PASSWORD", "")
-    except (FileNotFoundError, KeyError):
-        value = ""
-    return value or os.getenv("CHATBOT_ACCESS_PASSWORD", "")
-
-
-# O serviço ficará bloqueado até a senha de teste ser configurada no servidor.
-# Nenhuma chamada à API é possível antes da autenticação.
-access_password = get_access_password()
-if not access_password:
-    st.warning("Aplicativo em preparação: acesso para testes ainda não configurado.")
-    st.stop()
-if not st.session_state.get("authorized", False):
-    password = st.text_input("Senha de acesso para testes", type="password")
-    if st.button("Entrar"):
-        if hmac.compare_digest(password, access_password):
-            st.session_state["authorized"] = True
-            st.rerun()
-        else:
-            st.error("Senha inválida.")
-    st.stop()
+# Limite por sessão: contenção simples, não substitui controle por usuário ou IP.
+MAX_REQUESTS_PER_SESSION = 10
+if "request_count" not in st.session_state:
+    st.session_state["request_count"] = 0
 
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = fresh_history()
@@ -57,6 +37,7 @@ with st.sidebar:
     st.divider()
     st.caption("Projeto educacional. Não é assessoria financeira nem recomendação individual.")
     st.caption("As respostas da IA podem conter erros ou estar desatualizadas.")
+    st.caption(f"Perguntas utilizadas nesta sessão: {st.session_state['request_count']}/{MAX_REQUESTS_PER_SESSION}")
 
 history = st.session_state["chat_history"][topic]
 if not history:
@@ -72,6 +53,10 @@ if prompt is not None:
         prompt = validate_prompt(prompt)
     except ValueError as exc:
         st.warning(str(exc))
+        st.stop()
+
+    if st.session_state["request_count"] >= MAX_REQUESTS_PER_SESSION:
+        st.warning("Limite de perguntas desta sessão atingido.")
         st.stop()
 
     key = get_key()
@@ -90,6 +75,7 @@ if prompt is not None:
                 answer = responder(topic, history, key)
             st.markdown(answer)
         history.append({"role": "assistant", "content": answer})
+        st.session_state["request_count"] += 1
         # Limite memória mantida por tema na sessão; não gravamos logs das perguntas.
         if len(history) > 20:
             del history[:-20]
