@@ -2,7 +2,25 @@
 
 Protótipo de **assistente virtual educacional**, desenvolvido com Python, Streamlit e API OpenAI para esclarecer conceitos de investimentos no mercado brasileiro.
 
-**Estado:** serviço criado no Render, em fase de configuração e validação. O chat tem acesso público, sem senha de visitante, e depende de chave de API válida configurada somente no servidor.
+**[▶ Experimentar chatbot](https://chatbot-financeiro-9p1s.onrender.com/)** · **Python** · **Streamlit** · **OpenAI API** · **IA generativa**
+
+**Estado:** aplicação publicada no Render, com acesso direto, sem senha para visitantes. A operação depende da chave da API configurada apenas no servidor; o funcionamento do chat foi confirmado durante os testes do projeto.
+
+### Visão rápida
+
+| Tema | Experiência | Tecnologia |
+|---|---|---|
+| Renda fixa e renda variável | Perguntas e respostas educativas com contexto por sessão | Streamlit + API OpenAI |
+
+```mermaid
+flowchart LR
+    A["Pergunta do visitante"] --> B["Histórico da sessão e tema"]
+    B --> C["Prompt educacional"]
+    C --> D["API OpenAI"]
+    D --> E["Resposta no chat"]
+```
+
+> **Atenção:** o sistema não possui cotações em tempo real e não presta recomendações personalizadas. Há limite básico de respostas por sessão, que não substitui controles de custo na API.
 
 ## Objetivo
 
