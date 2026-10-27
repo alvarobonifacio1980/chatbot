@@ -4,6 +4,8 @@ Protótipo de **assistente virtual educacional**, desenvolvido com Python, Strea
 
 **[▶ Experimentar chatbot](https://chatbot-financeiro-9p1s.onrender.com/)** · **Python** · **Streamlit** · **OpenAI API** · **IA generativa**
 
+![Tela real do Chatbot Financeiro publicado no Render](https://raw.githubusercontent.com/alvarobonifacio1980/alvarobonifacio1980/main/assets/screenshots/chatbot.png)
+
 **Estado:** aplicação publicada no Render, com acesso direto, sem senha para visitantes. A operação depende da chave da API configurada apenas no servidor; o funcionamento do chat foi confirmado durante os testes do projeto.
 
 ### Visão rápida
