@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import hmac
 
 import streamlit as st
 
@@ -19,6 +20,30 @@ def get_key() -> str:
     except (FileNotFoundError, KeyError):
         value = ""
     return value or os.getenv("OPENAI_API_KEY", "")
+
+def get_access_password() -> str:
+    try:
+        value = st.secrets.get("CHATBOT_ACCESS_PASSWORD", "")
+    except (FileNotFoundError, KeyError):
+        value = ""
+    return value or os.getenv("CHATBOT_ACCESS_PASSWORD", "")
+
+
+# O serviço ficará bloqueado até a senha de teste ser configurada no servidor.
+# Nenhuma chamada à API é possível antes da autenticação.
+access_password = get_access_password()
+if not access_password:
+    st.warning("Aplicativo em preparação: acesso para testes ainda não configurado.")
+    st.stop()
+if not st.session_state.get("authorized", False):
+    password = st.text_input("Senha de acesso para testes", type="password")
+    if st.button("Entrar"):
+        if hmac.compare_digest(password, access_password):
+            st.session_state["authorized"] = True
+            st.rerun()
+        else:
+            st.error("Senha inválida.")
+    st.stop()
 
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = fresh_history()
