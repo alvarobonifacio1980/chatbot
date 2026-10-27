@@ -61,7 +61,7 @@ No Windows PowerShell: `$env:OPENAI_API_KEY="sua_chave"`.
 
 A chave também pode ser configurada nos *secrets* do Streamlit ou nas variáveis de ambiente da hospedagem. **Nunca inclua chaves no Git**. O arquivo `.env.example` é apenas ilustrativo; variáveis de um arquivo `.env` não são carregadas automaticamente.
 
-## Preparação para publicação no Render
+## Publicação no Render
 
 O repositório inclui `render.yaml` com as configurações do serviço web. Para configurar a implantação no [Render](https://dashboard.render.com/), conecte o repositório `alvarobonifacio1980/chatbot`, selecione a branch `main` e utilize:
 
@@ -70,9 +70,9 @@ Build Command: pip install -r requirements.txt
 Start Command: streamlit run chat.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
 ```
 
-Configure **OPENAI_API_KEY** como variável de ambiente secreta no painel do Render. O valor não deve aparecer em commits, prints públicos ou arquivos do projeto. O plano gratuito do Render não torna gratuitas as chamadas à API OpenAI: consulte cobrança e estabeleça limites de uso antes de disponibilizar o chatbot publicamente.
+A aplicação está publicada no Render. A chave **OPENAI_API_KEY** deve permanecer configurada como variável secreta no serviço; ela não deve aparecer em commits ou arquivos do projeto. A hospedagem gratuita não inclui créditos gratuitos da API OpenAI.
 
-**Status:** serviço criado no Render: https://chatbot-financeiro-9p1s.onrender.com. Configure a variável `OPENAI_API_KEY` no painel [Environment do Render](https://dashboard.render.com/web/srv-dbgg1bff3r2c73eh4q3g/env). O acesso é público e existe um limite de dez perguntas por sessão, apenas como contenção básica; isso não impede sessões repetidas nem substitui limites de consumo na API. A integração com a API precisa ser validada com uma conversa real após essa configuração. Estabeleça limites de gasto na conta OpenAI antes da divulgação.
+**Aplicativo:** https://chatbot-financeiro-9p1s.onrender.com. O acesso é público, sem senha. Existe um limite básico de dez respostas por sessão, que não impede sessões repetidas e não substitui limites de consumo ou controles de custo do provedor. O aplicativo foi testado em funcionamento; os testes automatizados do repositório são offline.
 
 ## Acesso público e controle de custos
 
