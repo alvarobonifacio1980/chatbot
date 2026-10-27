@@ -41,6 +41,19 @@ No Windows PowerShell: `$env:OPENAI_API_KEY="sua_chave"`.
 
 A chave também pode ser configurada nos *secrets* do Streamlit ou nas variáveis de ambiente da hospedagem. **Nunca inclua chaves no Git**. O arquivo `.env.example` é apenas ilustrativo; variáveis de um arquivo `.env` não são carregadas automaticamente.
 
+## Preparação para publicação no Render
+
+O repositório inclui `render.yaml` com as configurações do serviço web. Para configurar a implantação no [Render](https://dashboard.render.com/), conecte o repositório `alvarobonifacio1980/chatbot`, selecione a branch `main` e utilize:
+
+```text
+Build Command: pip install -r requirements.txt
+Start Command: streamlit run chat.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
+```
+
+Configure **OPENAI_API_KEY** como variável de ambiente secreta no painel do Render. O valor não deve aparecer em commits, prints públicos ou arquivos do projeto. O plano gratuito do Render não torna gratuitas as chamadas à API OpenAI: consulte cobrança e estabeleça limites de uso antes de disponibilizar o chatbot publicamente.
+
+**Status:** implantação ainda não efetuada. A execução da integração OpenAI requer uma chave ativa e o deploy deve ser validado com uma conversa real. Por utilizar API paga e não possuir autenticação/cotas por visitante, mantenha o endereço restrito à fase de testes ou implemente controles de abuso antes de divulgação ampla.
+
 ## Executar testes
 
 ```bash
